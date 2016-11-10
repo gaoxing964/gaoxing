@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>写博客模板</title>
+    <link rel="stylesheet" href="../static/css/common.css"/>
+    <link rel="stylesheet" href="../static/css/singleBlog.css"/>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+<div class="containerWrapper">
+    {% include 'header.html' %}
+    <div class="bodyBody">
+        <div class="aticles">
+            <div id="currentBlogContent">
+
+                <!--
+                content Info
+                -->
+                <div id="titleContainer">
+                    <h3 ng-cloak>
+                        http1.1和http1.0的区别
+                    </h3>
+                </div>
+                <div id="operationContainer">
+                    <span ng-cloak>WEB</span>
+                    <span ng-cloak>2016-06-15</span>
+                </div>
+                <div class="clear"></div>
+                <div id="singleBlogContent">
+
+                    <h4>
+                        前言
+                    </h4>
+                    <p>
+                        今天看http1.1和http1.0的区别的文章，发现自己对于 “  HTTP 1.1支持持久连接，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟。"  这样一句话完全没有概念。于是自己就写了这篇博客来帮助自己理解它。 我之所以不理解这句话，是因为我不理解http是建立在TCP协议上的这件事。
+                    </p>
+                    <h4>
+                        TCP的三次握手协议 。
+                    </h4>
+                    <p>
+                        首先我们来回顾一些TCP的三次握手协议 。 <img src="{{url_for('static', filename='images/20160524195304095.png')}}"/>
+                    </p>
+                    <ul id="_blogContentUI">
+                        <li>
+                            首先Client端发送连接请求报文    “你好！我想和你建立连接”，
+                        </li>
+                        <li>
+                            Server段接受连接后回复ACK报文，并为这次连接分配资源,"好啊！"。
+                        </li>
+                        <li>
+                            Client端接收到ACK报文后也向Server段发生ACK报文，并分配资源，这样TCP连接就建立了。“谢谢！我的下一份电报就是数据了奥”
+                        </li>
+                        <li>
+                            然后客户端和服务器经过了三次握手协议终于建立了连接了
+                        </li>
+                    </ul>
+                    <p>
+                        <span style="color:red">但是HTTP1.0规定一个HTTP请求后就必须要关闭这个TCP辛辛苦苦建立起来的连接 。要知道你要想成功的关闭这个连接还要经过4次挥手协议呢！  于是HTTP1.1很人性化的提出了 ，建立完TCP连接后，我可以传输多个HTTP请求 。 这样不就减少了这部分的浪费了嘛！</span>
+                    </p>
+                    <h4>
+                        参考资料
+                    </h4>
+                    <p>
+                        <a href="http://blog.csdn.net/whuslei/article/details/6667471">  TCP协议中的三次握手和四次挥手(图解)</a><br>
+                        <a href="http://blog.csdn.net/elifefly/article/details/3964766 "> http1.1和http1.0的比较</a>
+                    </p>
+
+                </div>
+                <style>
+                    #_blogContentUI{
+                        list-style: circle;
+                    }
+                    #_blogContentUI li{
+                        margin-top:10px;
+                        margin-bottom:10px;
+                    }
+                </style>
+                <!--
+                content Info
+                -->
+            </div>
+        </div>
+        <div class="rightInfo">
+            <p class="columns">
+                <em class="iconfont c-f26868"></em>
+                <span>栏目导航</span>
+            </p>
+
+            <div id="columnsContent">
+                <ul>
+                    {% for blogType in  blogTypes %}
+                        <li>
+                            <a class="singleContent" href="/studies?blogTypeID={{ blogType.blogTypeID }}">
+                                {{ blogType.blogTypeTitle }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div id="hotestArticles">
+                <div id="hotestArticlesTitleContainer">
+                    <span class="hotestArticlesArticlesTitle">最热<span>文章</span></span>
+                </div>
+
+                <ul class="rank">
+                    {% for blog in hotestBlogs %}
+                        <li title="{{ blog.blogTitle }}">
+                            <a href="/singleBlog/{{ blog.blogID }}">
+                                {{ blog.blogTitle }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="newestArticles">
+                <div id="newestArticlesTitleContainer">
+                    <span class="newestArticlesTitle">最新<span>文章</span></span>
+                </div>
+                <ul class="rank">
+                    {% for blog in newstBlogs %}
+                        <li title="{{ blog.blogTitle }}">
+                            <a href="/singleBlog/{{ blog.blogID }}">
+                                {{ blog.blogTitle }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="friendlyShareContainer">
+                <span class="friendlyShare">友情<span>链接</span></span>
+            </div>
+            <div id="shareTo">
+
+                <div class="bshare-custom icon-medium-plus">
+                    <a title="分享到QQ空间" class="bshare-qzone"></a>
+                    <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+                    <a title="分享到人人网" class="bshare-renren"></a>
+                    <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span
+                        class="BSHARE_COUNT bshare-share-count">0</span></div>
+                <script type="text/javascript" charset="utf-8"
+                        src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+            </div>
+            <div id="weixing">
+						<span class="weixingTitle">
+							扫描二维码添加<span>高兴</span>微信账号
+						</span>
+
+                <div class="weixingImg">
+                    <img src="../static/images/psb.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/angular.js"></script>
+<script src="../static/js/singleBlog.js"></script>
+</body>
+</html>

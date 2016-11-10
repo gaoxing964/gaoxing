@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>高兴的个人博客</title>
+    <link rel="stylesheet" href="../static/css/common.css"/>
+    <link rel="stylesheet" href="../static/css/submitBlog.css"/>
+
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+<div class="containerWrapper">
+    {% include 'header.html' %}
+    <div class="bodyBody">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>分类</th>
+                <th>标题</th>
+                <th>描述</th>
+                <th>发布时间</th>
+                <th>阅读量</th>
+                <th>关键词</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="blog in currentBlogs ">
+                <td width="10%">
+                    {[ blog.blogTypeID ]}
+                </td>
+                <td width="15%">
+                    {[ blog.blogTitle ]}
+                </td>
+                <td width="15%">
+                    {[ blog.blogDescription]}
+                </td>
+                <td width="10%">
+                    {[ blog.puhlishTime]}
+                </td>
+                <td width="10%">
+                    {[ blog.readCount ]}
+                </td>
+                <td width="20%">
+                    {[ blog.blogKeyWords ]}
+                </td>
+                 <td width="10%">
+                    <a href="#" ng-click="deleteBlog(blog)">
+                        删除
+                    </a>
+                     <a href="{['/toModifyBlog/'+blog.blogID]}">
+                        修改
+                     </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul id="pagination-clean">
+            <li class="previous-off" ng-if="currentPage != 1" ng-click="exechangePage(currentPage - 1)"><a href="#">«Previous</a>
+            </li>
+            <li ng-repeat="pageIndex in pages">
+                <a href="#" ng-if="pageIndex != currentPage " ng-click="exechangePage(pageIndex)">{[pageIndex]}</a>
+                <a href="#" class="active" ng-if="pageIndex == currentPage " ng-click="exechangePage(pageIndex)">{[pageIndex]}</a>
+            </li>
+            <li class="next" ng-if="currentPage != maxPage" ng-click="exechangePage(currentPage + 1)"><a href="#">Next»</a></li>
+        </ul>
+    </div>
+
+</div>
+<script src="../static/js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/angular.js"></script>
+<script src="../static/js/manage.js"></script>
+</body>
+</html>

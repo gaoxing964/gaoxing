@@ -1,0 +1,148 @@
+/**头部的样式  **/
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('iconfont.eot');
+    /* IE9*/
+    src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('iconfont.woff') format('woff'), /* chrome、firefox */ url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('iconfont.svg#iconfont') format('svg');
+    /* iOS 4.1- */
+}
+
+/** 公共的清零样式 **/
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.header {
+    background: url(../images/pic-01.png) right 0 no-repeat;
+    background-size: 30%;
+    width: 1000px;
+    margin: 0 auto;
+    height: 110px;
+
+}
+
+.header > img {
+    width: 110px;
+    margin: 10px 10px 10px 500px;
+}
+
+.nav li {
+    float: left;
+    margin: 0 35px;
+
+}
+
+#navContainer > .nav {
+    width: 1000px;
+    margin: 0 auto;
+    height: 41px;
+}
+
+.menuContent {
+    display: inline-block;
+    padding: 9px 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+a.menuContent:hover {
+    background: #f26868;
+    color: white;
+    text-decoration: none;
+}
+
+#navContainer {
+    background: #565757;
+}
+
+.clear {
+    clear: both;
+}
+
+body {
+    font-family: "Microsoft Yahei" !important;
+    color: #333;
+}
+
+/**分页的样式**/
+
+ul {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+#pagination-clean {
+    margin-left: 30%;
+}
+#pagination-clean li {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    list-style: none;
+}
+#pagination-clean li, #pagination-clean a {
+    border: solid 1px #DEDEDE margin-right : 2 px;
+}
+
+#pagination-clean .previous-off,
+#pagination-clean .next-off {
+    color: #888888 display : block;
+    float: left;
+    font-weight: bold;
+    padding: 3px 4px;
+}
+
+#pagination-clean .next a,
+#pagination-clean .previous a {
+    font-weight: bold;
+    border: solid 1px #FFFFFF;
+}
+
+#pagination-clean a:link,
+#pagination-clean a:visited {
+    color: #0033CC display : block;
+    float: left;
+    padding: 3px 6px;
+    text-decoration: none;
+}
+
+#pagination-clean a:hover {
+    text-decoration: none;
+}
+
+#pagination-clean .active {
+    color: #fd8a61;
+}
+/**angularJS用到的css**/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.rank a{
+    color:black;
+    text-decoration: none;
+}
+
+.singleContent{
+    color:black;
+    text-decoration: none;
+}
+.display {
+	display: none ;
+}
+a{
+    cursor:pointer;
+}
+.requiredClass{
+    color:red;
+}

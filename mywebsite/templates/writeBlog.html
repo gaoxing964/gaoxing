@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高兴的个人博客</title>
+</head>
+<body>
+<article>
+    <section>
+        <h3>
+            外部的js文件会不会阻塞html的解析和渲染 ？
+        </h3>
+        <p class="pContent">
+           <span class="headerBold"> 猜想：<span>不会的， 现代的浏览器应该已经做了优化。
+        </span></span></p>
+        <p class="pContent">
+           <span class="headerBold">  实验方法：</span>在页面中放一段执行时间超过2秒的js代码。然后在阻塞代码的后面判断能不能去的后续的dom元素。
+        </p>
+        <p class="pContent">
+           <span class="headerBold"> 实验结果：</span>没想到是这样的结果！   Script文件果真阻塞了dom的解析。 浏览器真的是一个文件一个文件的解析的。
+        </p>
+        <span class="headerBold">代码</span>
+        <pre>var begin = new Date();
+var end = new Date();
+while((end.valueOf() - begin.valueOf())&lt;(1000*15)){
+    end = new Date();
+}
+        </pre>
+  <pre>
+        &lt;!DOCTYPE&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Test&lt;/title&gt;
+        &lt;script src="testHelloWorld.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id="test"&gt;
+            这是一个测试dom
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        <span class="headerBold">
+            实验
+        </span><br>
+        <a href="/sample/sampleForjs" target="_blank">
+            你是不是等待了15秒后,页面才显示出来 ？  如果你不小心在页面上加了一个恶意的javascrpit文件。后果该有多严重！！！！
+        </a>
+    </section>
+    <style>
+.textAreaShowHtml{
+    width:100%;
+    height:500px;
+}
+.headerBold{
+    font-weight: bold;
+}
+
+    </style>
+
+</article>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>高兴的个人博客</title>
+    <link rel="stylesheet" href="../static/css/common.css"/>
+    <link rel="stylesheet" href="../static/css/submitBlog.css"/>
+    <script>
+        {% if blog  %}
+        window.blog = {
+            blogTitle:"{{ blog.blogTitle }}",
+            blogTypeID:"{{ blog.blogTypeID }}",
+            blogID:"{{blog.blogID  }}",
+            blogContent:"",
+            puhlishTime:"{{ blog.puhlishTime }}",
+            readCount:"{{  blog.readCount }}",
+            raiseFlag:"{{ blog.raiseFlag }}",
+            blogKeyWords:"{{ blog.blogKeyWords  }}",
+            blogDescription:"{{ blog.blogDescription   }}"
+        }
+        {% endif %}
+        window.operationType = "{{ operationType }}"
+    </script>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+<div class="containerWrapper">
+    {% include 'header.html' %}
+    <div class="bodyBody">
+
+
+            <form class="form-horizontal" name="blogForm" target="_blank" action="/preview" method="post">
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">文章标题</label>
+
+                    <div class="col-xs-10">
+                        <input required type="text" class="form-control" name="blogTitle" ng-model="blog.blogTitle" placeholder="文章标题">
+                        <span ng-show="blogForm.blogTitle.$error.required && blogForm.blogTitle.$dirty" class="requiredClass">
+                                博客标题不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="博客分类" class="col-xs-2 control-label">博客分类</label>
+
+                    <div class="col-xs-6">
+                        <select ng-model="blog.blogTypeID" class="form-control" name="blogTypeID" required>
+                            <option value="{[blogType.blogTypeID]}" ng-repeat="blogType in blogTypes">{[blogType.blogTypeTitle]}</option>
+                        </select>
+                         <span ng-show="blogForm.blogTypeID.$error.required && blogForm.blogTypeID.$dirty" class="requiredClass">
+                                博客分类不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2">
+
+                    </div>
+                    <div class="col-xs-10">
+                             <textarea id="blogContent" name="blogContent"  >
+                                 {% if blog  %}
+                                        {{blog.blogContent | safe }}
+                                 {% endif %}
+                             </textarea>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">博客描述</label>
+
+                    <div class="col-xs-10">
+                               <textarea class="form-control" ng-model="blog.blogDescription" required="true" name="blogDescription">
+
+                               </textarea>
+                          <span ng-show="blogForm.blogDescription.$error.required && blogForm.blogDescription.$dirty" class="requiredClass">
+                                博客描述不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="博客分类" class="col-xs-2 control-label">关键词</label>
+
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" ng-model="blog.blogKeyWords" name="blogKeyWords" required />
+                        <span ng-show="blogForm.blogKeyWords.$error.required && blogForm.blogKeyWords.$dirty" class="requiredClass">
+                                关键字不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                            <button  class="btn btn-default" ng-click="submibBlog()" >提交</button>
+                            <button type="submit"  ng-click="preview()"  id="removeStype" type="button" class="btn btn-default">preview</button>
+                    </div>
+                </div>
+            </form>
+
+    </div>
+
+</div>
+<script src="../static/js/nicEdit.js"></script>
+<script src="../static/js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/nicEdit.js"></script>
+<script src="../static/js/angular.js"></script>
+<script src="../static/js/submitBlog.js"></script>
+</body>
+</html>

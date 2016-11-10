@@ -1,0 +1,5 @@
+name: gaoxing964
+version: 1
+libraries:
+- name: pycrypto
+  version: "2.6"

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ blog.blogTitle }}</title>
+    <link rel="stylesheet" href="/static/css/common.css"/>
+    <link rel="stylesheet" href="/static/css/singleBlog.css"/>
+    <link rel="stylesheet" href="/static/css/mainBlog.css"/>
+    <meta name="keywords" content="{{ blog.blogKeyWords }}"/>
+    <meta name="description" content="{{ blog.blogDescription }}"/>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+<div class="containerWrapper">
+    {% include 'header.html' %}
+    <div class="bodyBody">
+        <div class="aticles">
+            <div id="currentBlogContent">
+                <div id="titleContainer">
+                    <h3 ng-cloak>{{ blog.blogTitle }}</h3>
+                </div>
+                <div id="operationContainer">
+                    <span ng-cloak>{{ blog.puhlishTime | dateToString }}</span>
+                    <span ng-cloak>{{ blog.blogTypeID | blogTypeFormat }}</span>
+                </div>
+                <div class="clear"></div>
+                <div id="singleBlogContent">
+                    {{ blog.blogContent | safe }}
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="rightInfo">
+            <p class="columns">
+                <em class="iconfont c-f26868"></em>
+                <span>栏目导航</span>
+            </p>
+
+            <div id="columnsContent">
+                <ul>
+
+
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div id="hotestArticles">
+                <div id="hotestArticlesTitleContainer">
+                    <span class="hotestArticlesArticlesTitle">最热<span>文章</span></span>
+                </div>
+
+                <ul class="rank">
+
+                    <li title="帝国cms首页、自定义页面如何实现分页">
+                        <a href="/singleBlog/2">
+                            帝国cms首页、自定义页面如何实现分页
+                        </a>
+                    </li>
+
+                    <li title="帝国cms首页、自定义页面如何实现分页">
+                        <a href="/singleBlog/3">
+                            帝国cms首页、自定义页面如何实现分页
+                        </a>
+                    </li>
+
+                    <li title="帝国cms首页、自定义页面如何实现分页">
+                        <a href="/singleBlog/5">
+                            帝国cms首页、自定义页面如何实现分页
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <div id="newestArticles">
+                <div id="newestArticlesTitleContainer">
+                    <span class="newestArticlesTitle">最新<span>文章</span></span>
+                </div>
+                <ul class="rank">
+                    <li title="帝国cms首页、自定义页面如何实现分页">
+                        <a href="/singleBlog/2">
+                            帝国cms首页、自定义页面如何实现分页
+                        </a>
+                    </li>
+
+                    <li title="帝国cms首页、自定义页面如何实现分页">
+                        <a href="/singleBlog/3">
+                            帝国cms首页、自定义页面如何实现分页
+                        </a>
+                    </li>
+
+                    <li title="帝国cms首页、自定义页面如何实现分页">
+                        <a href="/singleBlog/5">
+                            帝国cms首页、自定义页面如何实现分页
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div id="friendlyShareContainer">
+                <span class="friendlyShare">友情<span>链接</span></span>
+            </div>
+            <div id="shareTo">
+
+                <div class="bshare-custom icon-medium-plus">
+                    <a title="分享到QQ空间" class="bshare-qzone"></a>
+                    <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+                    <a title="分享到人人网" class="bshare-renren"></a>
+                    <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span
+                        class="BSHARE_COUNT bshare-share-count">0</span></div>
+                <script type="text/javascript" charset="utf-8"
+                        src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+            </div>
+            <div id="weixing">
+						<span class="weixingTitle">
+							扫描二维码添加<span>高兴</span>微信账号
+						</span>
+
+                <div class="weixingImg">
+                    <img src="../static/images/psb.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/angular.js"></script>
+<script src="../static/js/singleBlog.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>高兴的博客</title>
+    <link rel="stylesheet" href="../static/css/common.css"/>
+    <link rel="stylesheet" href="../static/css/stuides.css"/>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+<div class="containerWrapper">
+    {% include 'header.html' %}
+    <div class="bodyBody">
+        <div class="aticles">
+            <div class="singleArticle" ng-repeat="blog in currentBlogs">
+                <div class="articleHeaderContainer">
+                    <span ng-bind="blog.blogTitle"></span>
+                </div>
+                <div class="articleContainer">
+                    <img src="../static/images/1d7c3211eba65ca6b328d7f28e10ecc6.jpg"/>
+                </div>
+                <div class="articleContent">
+                    <p ng-bind="blog.blogDescription">
+
+                            </p>
+							    <a class="readMore" href="{['/singleBlog/'+blog.blogID]}">
+								阅读全文》
+							</a>
+                    </div>
+                <div class="singleArticleFooter">
+							<span class="publishTime">
+								{[blog.puhlishTime | timeFormate]}
+							</span>
+							<span class="articleComeFrom">
+								个人博客：<span>{[blog.blogTypeID | blogTypeConfirm]}</span>
+							</span>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <ul id="pagination-clean">
+                <li class="previous-off" ng-if="currentPage != 1" ng-click="exechangePage(currentPage - 1)"><a href="#">«Previous</a></li>
+                <li ng-repeat="pageIndex in pages">
+                    <a href="#" ng-if="pageIndex != currentPage " ng-click="exechangePage(pageIndex)">{[pageIndex]}</a>
+                    <a href="#" class="active" ng-if="pageIndex == currentPage " ng-click="exechangePage(pageIndex)">{[pageIndex]}</a>
+                </li>
+                <li class="next" ng-if="currentPage != maxPage" ng-click="exechangePage(currentPage + 1)"><a href="#">Next »</a></li>
+            </ul>
+        </div>
+        <div class="rightInfo">
+            <p class="columns">
+                <em class="iconfont c-f26868"></em>
+                <span>栏目导航</span>
+            </p>
+
+            <div id="columnsContent">
+                <ul>
+                    <li ng-repeat="blogType in blogTypes">
+								<a class="singleContent" ng-click="exchangeBlogType(blogType.blogTypeID)" ng-cloak >
+									{[blogType.blogTypeTitle]}
+								</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div id="hotestArticles">
+                <div id="hotestArticlesTitleContainer">
+                    <span class="hotestArticlesArticlesTitle">最热<span>文章</span></span>
+                </div>
+
+                <ul class="rank">
+                    <li title="{[blog.blogTitle]}" ng-repeat="blog in hotestBlogs">
+								<a ng-bind="blog.blogTitle "  href="{['/singleBlog/'+blog.blogID]}">
+								</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="newestArticles">
+                <div id="newestArticlesTitleContainer">
+                    <span class="newestArticlesTitle">最新<span>文章</span></span>
+                </div>
+                <ul class="rank">
+                     <li title="{[blog.blogTitle]}" ng-repeat="blog in newestBlogs">
+								<a ng-bind="blog.blogTitle"  href="{['/singleBlog/'+blog.blogID]}">
+								</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="friendlyShareContainer">
+                <span class="friendlyShare">友情<span>链接</span></span>
+            </div>
+            <div id="shareTo">
+                <div class="bshare-custom icon-medium-plus">
+                    <a title="分享到QQ空间" class="bshare-qzone"></a>
+                    <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+                    <a title="分享到人人网" class="bshare-renren"></a>
+                    <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span
+                        class="BSHARE_COUNT bshare-share-count">0</span></div>
+                <script type="text/javascript" charset="utf-8"
+                        src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+            </div>
+            <div id="weixing">
+						<span class="weixingTitle">
+							扫描二维码添加<span>高兴</span>微信账号
+						</span>
+                <div class="weixingImg">
+                    <img src="../static/images/psb.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/angular.js"></script>
+<script src="../static/js/studies.js"></script>
+</body>
+</html>

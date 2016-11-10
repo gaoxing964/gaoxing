@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>高兴的个人博客</title>
+		<link rel="stylesheet" href="../static/css/common.css" />
+		<link rel="stylesheet" href="../static/css/words.css" />
+	</head>
+
+	<body ng-app="myApp" ng-controller="myController">
+		<div class="containerWrapper">
+			{% include "header.html" %}
+			<div class="bodyBody">
+				<div class="wordsContent">
+					<span>当前位置：</span><span>主页</span><span> > </span><span>留言板</span>
+
+					<div class="raiseLove">
+						<a class="likeContainer" href="#">
+							<span class="heartImage"></span>
+							<span class="heartText">喜欢</span>
+							<span class="disLoveText display">取消喜欢</span>
+						</a>
+						<span>
+							<span>2</span>人喜欢
+						</span>
+					</div>
+					<div class="hr"></div>
+					<ul id="leftWordsContainer" class="list-group">
+						<li href="#" class="list-group-item  list-group-item-info">
+							被顶起来的评论
+						</li>
+						<li href="#" class="list-group-item " ng-repeat="word in raiseWords">
+							<div class="headerContainer">
+								<img src="../static/images/100.gif" />
+							</div>
+							<div class="singleWordsContent">
+								<span class="userName">teng.gao</span>
+
+								<p ng-bind="word.wordsContent"></p>
+
+								<div class="singWordOperation">
+									<a>
+                                {[word.publishTime | timeFormate]}
+                            </a>
+									<a href="#" class="replayContainer display">
+										<span></span> 回复
+									</a>
+									<a href="#" class="raiseContainer">
+										<span></span> 顶(3)
+									</a>
+									<a href="#" class="convertContainer display">
+										<span></span> 转发
+									</a>
+									<a href="#" class="reportCrimiaml display">
+										<span></span> 举报
+									</a>
+								</div>
+							</div>
+
+						</li>
+					</ul>
+					<div class="leftWordsHeader">
+						<a href="#">
+							<span>高兴</span>
+						</a>
+					</div>
+					<div class="leftWordsCommit">
+
+						<img class="logoSubmit" src="http://wx.qlogo.cn/mmopen/ibdbgXWjCJEicDkbL6jz5WV5dhpzgvGshukFnUmFv58OwCOmI0EmxDFqfpeGowjj8REcLvuoUwibzs9BjJ5rNw6jWurXSibxfW2E/0" />
+
+						<div class="leftWordsInput">
+							<textarea class=" form-control" class="form-control" ng-model="wordSubmit.wordsContent"></textarea>
+							<div>
+								<span class="sendButton" ng-click="submitWord()">
+                                发布
+                            </span>
+							</div>
+						</div>
+					</div>
+					<div class="leftWordsContainer">
+						<div class="leftWordsOperationHeader">
+							<a class="howManyWords" href="#"><span ng-bind="totalCount"></span>条评论</a>
+
+							<div class="operation"><a  ng-click="orderByExchange('publishTime','desc')">最新</a><a  ng-click="orderByExchange('publishTime','asc')">最早</a><a  ng-click="orderByExchange('raiseflag','desc')">最热</a>
+							</div>
+						</div>
+						<ul id="leftWordsLeft">
+							<li ng-repeat=" word in currentWords">
+								<div class="headerContainer">
+									<img src="../static/images/100.gif" />
+								</div>
+								<div class="singleWordsContent">
+									<span class="userName">teng.gao</span>
+
+									<p ng-bind="word.wordsContent"></p>
+
+									<div class="singWordOperation">
+										<a>
+                                            {[word.publishTime| timeFormate]}
+                                        </a>
+										<a  class="replayContainer" ng-click="replayWord(word)">
+											<span></span> 回复
+										</a>
+										<a  class="raiseContainer">
+											<span></span> 顶(3)
+										</a>
+										<a  class="convertContainer display">
+											<span></span> 转发
+										</a>
+										<a  class="reportCrimiaml display" >
+											<span></span> 举报
+										</a>
+									</div>
+								</div>
+
+								<ul class="leftWordReply">
+									<li ng-repeat="subWord in currentSubWords | filter:{ parentsID : word.wordsId }">
+										<div class="headerContainer">
+											<img src="../static/images/100.gif" />
+										</div>
+										<div class="singleWordsContent">
+											<span class="userName">teng.gao</span>
+
+											<p ng-bind="subWord.wordsContent"></p>
+
+											<div class="singWordOperation">
+												<a>
+                                            		{[subWord.publishTime | timeFormate]}
+                                        		</a>
+												<a class="replayContainer display" >
+													<span></span> 回复
+												</a>
+												<a class="raiseContainer display">
+													<span></span> 顶(3)
+												</a>
+												<a class="convertContainer display">
+													<span></span> 转发
+												</a>
+												<a class="reportCrimiaml display">
+													<span></span> 举报
+												</a>
+											</div>
+									</li>
+								</ul>
+								<div class="leftWordsCommit display subLeftWordsCommit" wordId ="{[word.wordsId]}">
+									<img class="logoSubmit" src="http://wx.qlogo.cn/mmopen/ibdbgXWjCJEicDkbL6jz5WV5dhpzgvGshukFnUmFv58OwCOmI0EmxDFqfpeGowjj8REcLvuoUwibzs9BjJ5rNw6jWurXSibxfW2E/0" />
+									<div class="leftWordsInput">
+										<textarea class=" form-control" class="form-control" ng-model="wordSubmitSub.wordsContent"></textarea>
+										<div>
+											<span class="sendButton" ng-click="submitSubWord()">
+                               						发布
+                            				</span>
+										</div>
+									</div>
+								</div>
+								<div class="clear">
+
+								</div>
+							</li>
+						</ul>
+						<ul id="pagination-clean">
+							<li class="previous-off" ng-if="currentPage != 1" ng-click="exechangePage(currentPage - 1)"><a href="#">«Previous</a></li>
+							<li ng-repeat="pageIndex in pages">
+								<a href="#" ng-if="pageIndex != currentPage " ng-click="exechangePage(pageIndex)">{[pageIndex]}</a>
+								<a href="#" class="active" ng-if="pageIndex == currentPage " ng-click="exechangePage(pageIndex)">{[pageIndex]}</a>
+							</li>
+							<li class="next" ng-if="currentPage != maxPage" ng-click="exechangePage(currentPage + 1)"><a href="#">Next »</a></li>
+						</ul>
+						</div>
+					</div>
+					<div class="rightInfo">
+						<div id="searchContainer">
+							<div class="inputContainer">
+								<span class=""></span>
+								<input type="text">
+								<span class="searchButton">搜索</span>
+							</div>
+						</div>
+						<div class="clear"></div>
+						<div id="weixing">
+							<span class="weixingTitle">
+							扫描二维码添加<span>高兴</span>微信账号
+							</span>
+
+							<div class="weixingImg">
+								<img src="../static/images/psb.jpg" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script src="../static/js/angular.js"></script>
+			<script src="../static/js/jquery-1.11.3.min.js"></script>
+			<script src="../static/js/words.js"></script>
+	</body>
+
+</html>

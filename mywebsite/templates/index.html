@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>高兴的个人博客</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/common.css')}}"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}"/>
+
+</head>
+<body>
+<div class="containerWrapper" ng-app="myApp" ng-controller="myController">
+    {% include 'header.html' %}
+    <div class="bodyHeader">
+        <div class="phontos">
+            <div class="leftMain">
+                <img ng-src="{[images[0]]}"/>
+            </div>
+            <div class="rightFlow">
+                <ul>
+					<li ng-repeat="img in images">
+						<img ng-src="{[img]}" />
+					</li>
+                </ul>
+            </div>
+        </div>
+        <div class="headerAticles">
+            <span class="raiseArticleHeader">我的名片</span>
+            <ul class="contactInfo">
+                <li>
+                    <span class="spanHeader">网名：</span><span class="spanBody">高兴</span>
+                </li>
+                <li>
+                    <span class="spanHeader">职业：</span><span class="spanBody">前端工程师</span>
+                </li>
+                <li>
+                    <span class="spanHeader">QQ：</span><span class="spanBody">247580289</span>
+                </li>
+                <li>
+                    <span class="spanHeader">Email：</span><span class="spanBody">247580289@qq.com</span>
+                </li>
+            </ul>
+            <ul class="linkMore">
+                <li>
+                    <a href="/words" class="world" title="给我留言"></a>
+                </li>
+                <li>
+                    <a href="#" class="address" title="联系地址"></a>
+                </li>
+                <li>
+                    <a href="/skatings" class="photos" title="生活照片"></a>
+                </li>
+                <li>
+                    <a href="#" id="aChatWidthMe" class="qq" title="和我聊天"></a>
+                </li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <div class="bodyBody">
+        <div class="bodyHr">
+					<span class="labelRaiseAritcle">
+						<span class="">文章</span><span>推荐</span>
+					</span>
+        </div>
+        <div class="aticles">
+            <div class="singleArticle" ng-repeat="blog in  raiseBlogs">
+                <div class="articleHeaderContainer">
+                    <span ng-bind="blog.blogTitle"></span>
+                </div>
+                <div class="articleContainer">
+                    <img src="/static/images/1d7c3211eba65ca6b328d7f28e10ecc6.jpg"/>
+                </div>
+                <div class="articleContent">
+                    <p ng-cloak >
+						{[blog.blogDescription | contentSubstr]}
+                    </p>
+							<a class="readMore" href="{['/singleBlog/'+blog.blogID]}">
+								阅读全文》
+							</a>
+                </div>
+                <div class="singleArticleFooter">
+							<span class="publishTime">
+								{[blog.puhlishTime | timeFormate]}
+							</span>
+							<span class="articleComeFrom">
+								个人博客：<span>{[blog.blogTypeID | blogTypeConfirm]}</span>
+							</span>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="rightInfo">
+            <div id="weather">
+                <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=8" width="225" height="80"
+                        frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+            </div>
+            <div id="newestArticles">
+
+                <div id="newestArticlesTitleContainer">
+                    <span class="newestArticlesTitle">最新<span>文章</span></span>
+                </div>
+
+                <ul class="rank">
+                    <li title="{[blog.blogTitle]}" ng-repeat="blog in blogs">
+								<a ng-bind="blog.blogTitle"  href="{['/singleBlog/'+blog.blogID]}">
+								</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="friendlyShareContainer">
+                <span class="friendlyShare">友情<span>链接</span></span>
+            </div>
+            <div id="shareTo">
+
+                <div class="bshare-custom icon-medium-plus">
+                    <a title="分享到QQ空间" class="bshare-qzone"></a>
+                    <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+                    <a title="分享到人人网" class="bshare-renren"></a>
+                    <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span
+                        class="BSHARE_COUNT bshare-share-count">0</span></div>
+                <script type="text/javascript" charset="utf-8"
+                        src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+            </div>
+            <div id="weixing">
+						<span class="weixingTitle">
+							扫描二维码添加<span>高兴</span>微信账号
+						</span>
+
+                <div class="weixingImg">
+
+                    <img src="{{url_for('static', filename='images/psb.jpg')}}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}" charset="UTF-8"></script>
+<script src="{{url_for('static', filename='js/angular.js')}}" charset="UTF-8"></script>
+<script src="{{url_for('static', filename='js/index.js')}}" charset="UTF-8"></script>
+</body>
+
+</html>
