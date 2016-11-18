@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 __author__ = 'teng.gao'
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template ,send_from_directory
 import MySQLdb
 from datetime import date
 from  BlogDB import  BlogDB
@@ -10,6 +10,7 @@ from WordsDB import WordsDB
 from Blog import Blog
 #import sae
 import time
+from CommonTools import *
 from jinja2 import Environment, FileSystemLoader
 from DB import DB
 import sys
@@ -35,7 +36,11 @@ def words():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+	return render_template('index.html')
+	
+@app.route('/mobile', methods=['GET', 'POST'])
+def indexMobile():
+	return render_template('mobiles/index.html')
 
 @app.route('/skatings', methods=['GET'])
 def skatings():
@@ -209,6 +214,17 @@ def blogTypeFormat(t):
         if blogType['blogTypeID'] == t :
              blogTypeTitle = blogType['blogTypeTitle']
     return blogTypeTitle
+    
+    
+@app.route('/static_mobile/<path:path>')
+def send_mobile_static(path):
+    return send_from_directory('static_mobile', path)
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)  
+    
+
 
 
 if __name__ == '__main__':
