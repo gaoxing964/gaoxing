@@ -1,7 +1,4 @@
-'use strict';
-
-// Add ECMA262-5 method binding if not supported natively
-//
+/**让IE8兼容这些函数的补丁**/
 if (!('bind' in Function.prototype)) {
     Function.prototype.bind= function(owner) {
         var that= this;
@@ -91,11 +88,53 @@ if (!('some' in Array.prototype)) {
         return false;
     };
 }
-Other ECMA262-5 methods not implemented here include Array reduce/reduceRight, the JSON ones and the few new Object methods that can be reliably implemented as JS functions.
 
-shareimprove this answer
-edited May 7 '10 at 18:57
-answered May 7 '10 at 18:10
+/**装饰器模式要用到的代码**/
+Function.prototype.after = function(afterfn) {
+	var _self = this;
+	return function() {
+		var ret = _self.apply(this, arguments);
+		afterfn.apply(this, arguments);
+		return ret;
+	}
+}
 
-bobince
-353k73
+var after = function(_self, afterfn) {
+	return function() {
+		var ret = _self.apply(this, arguments);
+		afterfn.apply(this, arguments);
+		return ret;
+	}
+}
+/**复制javascript对象的方法 **/
+function clone(obj) {
+	var copy;
+
+	// Handle the 3 simple types, and null or undefined
+	if (null == obj || "object" != typeof obj) return obj;
+
+	// Handle Date
+	if (obj instanceof Date) {
+		copy = new Date();
+		copy.setTime(obj.getTime());
+		return copy;
+	}
+
+	// Handle Array
+	if (obj instanceof Array) {
+		copy = [];
+		for (var i = 0, len = obj.length; i < len; i++) {
+			copy[i] = clone(obj[i]);
+		}
+		return copy;
+	}
+
+	// Handle Object
+	if (obj instanceof Object) {
+		copy = {};
+		for (var attr in obj) {
+			if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+		}
+		return copy;
+	}
+}
