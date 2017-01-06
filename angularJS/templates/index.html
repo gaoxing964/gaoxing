@@ -31,7 +31,7 @@
 				body #authorComment {
 					position: fixed;
 					bottom: 20px;
-					width:100%;
+					width: 100%;
 					text-align: center;
 				}
 			}
@@ -44,7 +44,6 @@
 			#wrapperContainer .carousel-indicators li {
 				width: 60px;
 				border-radius: 0px;
-				
 				margin-left: 5px;
 				margin-right: 5px;
 			}
@@ -61,7 +60,7 @@
 			/**加上了这个class  就可以让这个页面有自己的背景了 **/
 			
 			.background {
-				background: #53CAF5 url(../static/images/bg.gif) repeat-x fixed bottom;
+				background: url(../static/images/timg.jpg);
 				/**
 				background: -moz-linear-gradient(top, rgb(92, 203, 246) 0%, rgb(0, 140, 206) 100%);
 				background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgb(92, 203, 246)), color-stop(100%, rgb(0, 140, 206)));
@@ -76,6 +75,10 @@
 			.colorWhite {
 				color: white;
 			}
+			
+			.colorBlack {
+				color: black;
+			}
 			/**这里的高度以后估计要 通过js指定了  现在先写死**/
 			
 			.itemContent {
@@ -86,18 +89,14 @@
 			
 			.logoContainer {
 				float: left;
-				/*border: 1px rgb(96, 185, 69) solid;*/
 				padding: 15px;
 				margin-left: 20px;
 				margin-right: 20px;
-				margin-top: 10px;
-				margin-bottom: 10px;
-				/*border-radius: 5px;*/
-				background: #ffffff;
-			}
-			
-			#logoWrapper {
-				margin-top: 20px;
+				border-radius: 5px;
+				background: white;
+				margin-top: 8px;
+				margin-bottom: 8px;
+				opacity: 0.75;
 			}
 			
 			.logoContainer .pictureContainer {
@@ -190,8 +189,7 @@
 			
 			#logoCarousel {
 				/**background: #ffffcc;**/
-				background:url(../static/images/bg_180.gif) repeat-x;
-				margin-top: 15px
+				/**background:url(../static/images/bg_180.gif) repeat-x;**/
 			}
 			
 			#wrapperContainer>.row>.col-xs-12 {
@@ -204,6 +202,20 @@
 				border: 1px solid rgb(126, 215, 248);
 				margin-left: 5px;
 				margin-right: 5px;
+			}
+			
+			#backgroundImg {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				z-index: -1;
+			}
+			.clear{
+				clear:both;
+			}
+			
+			#headerContainer h1{
+				margin-left: 15px;
 			}
 		</style>
 		<script>
@@ -223,7 +235,13 @@
 
 			//初始化logo的宽度
 			function initLogoWidth() {
-				$('#logoWrapper').parent().css('padding-left', (($('#logoWrapper').parent().width() - 30) % 270) / 2 + 15 + 'px');
+			
+				var leftWidth = ($('#logoWrapper').parent().width() - 30) % 270;
+				$('#logoWrapper').parent().css('padding-left', (leftWidth) / 2 + 15 + 'px');
+				
+				var totalWidth = parseInt(($('#logoWrapper').parent().width() - 30) / 270)*270 + 'px';
+				$('#headerContainer').css('width',totalWidth);
+				
 				var padding_top = ($(window).height() - ($('#logoWrapper').parent().height() + 160)) / 2 - 80;
 				padding_top = padding_top > 0 ? padding_top : 0;
 				$('#wrapperContainer').css('padding-top', padding_top + 'px');
@@ -248,44 +266,19 @@
 		</script>
 	</head>
 
-	<body class="background">
+	<body class="background ">
+		<img id="backgroundImg" src="../static/images/timg.jpg" />
 		<div id="wrapperContainer">
 			<div class="container-fluid ">
 				<div class="row">
 					<div class="col-xs-12">
-						<div id="headerContainer">
-							<h1 class="floatLeft colorWhite">iManage</h1>
-							<div class="floatRight loginInfoContainer colorWhite">
-								<div class="infoItem floatRight">
-									<span class="glyphicon glyphicon-comment"></span>
-								</div>
-								<div class="logOutItem floatRight">
-									<span class="glyphicon glyphicon-log-out">
-									</span>
-								</div>
-								<div class="headerItem floatRight">
-									<div class="headerLine">
-									</div>
-								</div>
-								<div class="headerImagItem floatRight">
-									<img src="http://bpm.spreadtrum.com/ProjectCommom.ashx?method=GetUserImage&UserAD=qinghua.zhou" />
-								</div>
-								<div class="textInfo floatRight">
-									<span>
-										teng.gao
-									</span><br />
-									<span>
-										已登录
-									</span>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 				<div class="row">
 
 					<div class="col-xs-12">
-						<div id="logoCarousel" class="carousel slide" data-ride="carousel">
+						<div id="logoCarousel" class="carousel slide colorBlack" data-ride="carousel">
 
 							<ol class="carousel-indicators">
 								<li data-target="#logoCarousel" data-slide-to="0" class="active"></li>
@@ -300,6 +293,36 @@
 											<div class="row">
 												<div class="col-xs-12">
 													<div id="logoWrapper">
+														<div id="headerContainer">
+															<h1 class="floatLeft colorWhite">iManage</h1>
+															<div class="floatRight loginInfoContainer colorWhite">
+																<div class="infoItem floatRight">
+																	<span class="glyphicon glyphicon-comment"></span>
+																</div>
+																<div class="logOutItem floatRight">
+																	<span class="glyphicon glyphicon-log-out">
+																	</span>
+																</div>
+																<div class="headerItem floatRight">
+																	<div class="headerLine">
+																	</div>
+																</div>
+																<div class="headerImagItem floatRight">
+																	<img src="http://bpm.spreadtrum.com/ProjectCommom.ashx?method=GetUserImage&UserAD=qinghua.zhou" />
+																</div>
+																<div class="textInfo floatRight">
+																	<span>
+																		teng.gao
+																		</span><br />
+																	<span>
+																		已登录
+																	</span>
+																</div>
+															</div>
+														</div>
+														<div class="clear">
+															
+														</div>
 														<div class="logoContainer logoTwice">
 															<h4>iTask</h4>
 															<div class="pictureContainer">
