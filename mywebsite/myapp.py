@@ -12,7 +12,6 @@ from Blog import Blog
 import time
 from CommonTools import *
 from jinja2 import Environment, FileSystemLoader
-from DB import DB
 import sys
 
 reload(sys)
