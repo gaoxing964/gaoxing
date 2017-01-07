@@ -1,0 +1,35 @@
+/**公用的font-size类**/
+.fontSize12 {
+	font-size: 12px;
+}
+
+.fontSize14 {
+	font-size: 14px;
+}
+
+.fontSize16 {
+	font-size: 16px;
+}
+
+.fontSize18 {
+	font-size: 18px;
+}
+
+.fontSize20 {
+	font-size: 20px;
+}
+
+/**左浮动 右浮动 清空浮动**/
+.clear{
+	clear:both;
+}
+.floatLeft{
+	float:left;
+}
+.floatRight{
+	float:right;
+}
+
+
+
+
