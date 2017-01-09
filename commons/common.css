@@ -1,4 +1,5 @@
 /**公用的font-size类**/
+
 .fontSize12 {
 	font-size: 12px;
 }
@@ -19,17 +20,21 @@
 	font-size: 20px;
 }
 
+
 /**左浮动 右浮动 清空浮动**/
-.clear{
-	clear:both;
-}
-.floatLeft{
-	float:left;
-}
-.floatRight{
-	float:right;
+
+.clear {
+	clear: both;
 }
 
+.floatLeft {
+	float: left;
+}
 
+.floatRight {
+	float: right;
+}
 
-
+body {
+	font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", Heiti, "黑体", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", sans-serif;
+}
