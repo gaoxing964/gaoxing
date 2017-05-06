@@ -13,4 +13,10 @@ body {
 }
 * html .clearfix {zoom: 1;}
 
-
+/**左浮动**/
+.float_left{
+	float:left;
+}
+.float_right{
+	float:right;
+}
